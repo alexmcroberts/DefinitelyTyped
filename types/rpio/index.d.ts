@@ -359,9 +359,33 @@ declare namespace RPIO {
          *
          * Valid options:
          * gpio: use the Broadcom GPIOxx naming
-         * physical: use the physical P01-P40 header layou
+         * physical: use the physical P01-P40 header layout
          */
         mapping?: "gpio" | "physical";
+        
+        /**
+         * Mock mode is a dry-run environment where everything except pin access is performed. This is useful for testing scripts, and can also be used on systems which do not support GPIO at all.
+         * 
+         * If rpio is executed on unsupported hardware it will automatically start up in mock mode, and a warn event is emitted. By default the warn event is handled by a simple logger to stdout, but this can be overridden by the user creating their own warn handler.
+         * 
+         * The user can also explicitly request mock mode, where the argument is the type of hardware they wish to emulate. The currently available options are:
+         *
+         * 26-pin Raspberry Pi models
+         * raspi-b-r1 (early rev 1 model)
+         * raspi-a
+         * raspi-b
+         *
+         * 40-pin Raspberry Pi models
+         * raspi-a+
+         * raspi-b+
+         * raspi-2
+         * raspi-3
+         * raspi-zero
+         * raspi-zero-w (zero with wireless)
+         *
+         * The default unsupported hardware emulation is raspi-3.
+         */
+        mock?: undefined | "raspi-b-r1" | "raspi-a" | "raspi-b" | "raspi-a+" | "raspi-b+" | "raspi-2" | "raspi-3" | "raspi-zero" | "raspi-zero-w";
     }
 
     interface CallbackFunction {
